@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/5 | Hexo</title>
+  <title>沙盒下载 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2018/05/index.html">
+  <meta name="description" content="1NSString *path = NSHomeDirectory(); 上面的代码得到的是应用程序目录的路径，在该目录下有三个文件夹：Documents、Library、temp以及一个.app包！该目录下就是应用程序的沙盒，应用程序只能访问该目录下的文件夹！！！">
+<meta name="keywords" content="随笔,沙盒,下载,NSURLSessionDownloadTask">
+<meta property="og:type" content="article">
+<meta property="og:title" content="沙盒下载">
+<meta property="og:url" content="http://yoursite.com/2018/05/14/沙盒下载/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1NSString *path = NSHomeDirectory(); 上面的代码得到的是应用程序目录的路径，在该目录下有三个文件夹：Documents、Library、temp以及一个.app包！该目录下就是应用程序的沙盒，应用程序只能访问该目录下的文件夹！！！">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-14T09:07:51.517Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="沙盒下载">
+<meta name="twitter:description" content="1NSString *path = NSHomeDirectory(); 上面的代码得到的是应用程序目录的路径，在该目录下有三个文件夹：Documents、Library、temp以及一个.app包！该目录下就是应用程序的沙盒，应用程序只能访问该目录下的文件夹！！！">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,36 +155,76 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-沙盒下载" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/14/沙盒下载/" class="archive-article-date">
-  	<time datetime="2018-05-14T09:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-14</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/14/沙盒下载/">沙盒下载</a>
+    <h1 class="article-title" itemprop="name">
+      沙盒下载
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/05/14/沙盒下载/" class="archive-article-date">
+  	<time datetime="2018-05-14T09:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSString *path = NSHomeDirectory();</span><br></pre></td></tr></table></figure>
+<p>上面的代码得到的是应用程序目录的路径，在该目录下有三个文件夹：Documents、Library、temp以及一个.app包！该目录下就是应用程序的沙盒，应用程序只能访问该目录下的文件夹！！！<br><a id="more"></a><br>1、Documents 目录：主要用来保存由应用程序本身所产生的文件或者数据内容，例如，项目涂鸦时候的绘图，截屏之类的内容，项目的进度等等，需要注意的是改目录的文件会被自动保存在iCloud,该目录不能保存从网络上下载的内容，否则可能导致不能上线；</p>
+<p>2、AppName.app 目录：这是应用程序的程序包目录，包含应用程序的本身。由于应用程序必须经过签名，所以您在运行时不能对这个目录中的内容进行修改，否则可能会使应用程序无法启动。</p>
+<p>3、Library 目录：这个目录下有两个子目录：<br>Preferences 目录：包含应用程序的偏好设置文件。您不应该直接创建偏好设置文件，而是应该使用NSUserDefaults类来取得和设置应用程序的偏好.<br>Caches 目录：用于存放应用程序专用的支持文件，保存应用程序再次启动过程中需要的信息。比如杂志、新闻、地图应用使用的数据库缓存文件和可下载内容应该保存到这个文件夹。主要用来保存临时文件，既后续需要使用的内容，例如：缓存图片，离线数据等等，特点是系统不会清理Cache目录中的文件，因此，在开发的时候最好提供清除该内容的解决方案，不然有可能导致越来越大</p>
+<p>可创建子文件夹。可以用来放置您希望被备份但不希望被用户看到的数据。该路径下的文件夹，除Caches以外，都会被iTunes备份。</p>
+<p>4、tmp 目录：这个目录用于存放临时文件，保存应用程序再次启动过程中不需要的信息。该路径下的文件不会被iTunes备份。</p>
+<h3 id="最通俗的理解方式："><a href="#最通俗的理解方式：" class="headerlink" title="最通俗的理解方式："></a>最通俗的理解方式：</h3><p>如果你做个记事本的app，那么用户写了东西，总要把东西存起来。那么这个文件则是用户自行生成的，就放在documents文件夹里面。</p>
+<p>如果你有一个app，需要和服务器配合，经常从服务器下载东西，展示给用户看。那么这些下载下来的东西就放在library/cache。<br>apple对这个很严格，放错了就会被拒。主要原因是ios的icloud的同步问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 获取沙盒主目录路径</span><br><span class="line">NSString *homeDir = NSHomeDirectory();</span><br><span class="line">// 获取Documents目录路径</span><br><span class="line">NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];</span><br><span class="line">// 获取Library的目录路径</span><br><span class="line">NSString *libDir = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];</span><br><span class="line">// 获取Caches目录路径</span><br><span class="line">NSString *cachesDir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];</span><br><span class="line">// 获取tmp目录路径</span><br><span class="line">NSString *tmpDir =  NSTemporaryDirectory();</span><br></pre></td></tr></table></figure>
+<h3 id="NSSearchPathForDirectoriesInDomains"><a href="#NSSearchPathForDirectoriesInDomains" class="headerlink" title="NSSearchPathForDirectoriesInDomains"></a>NSSearchPathForDirectoriesInDomains</h3><p>NSSearchPathForDirectoriesInDomains方法用于查找目录，返回指定范围内的指定名称的目录的路径集合。有三个参数：</p>
+<p><strong> directory </strong> NSSearchPathDirectory类型的enum值，表明我们要搜索的目录名称，比如这里用NSDocumentDirectory表明我们要搜索的是Documents目录。如果我们将其换成NSCachesDirectory就表示我们搜索的是Library/Caches目录。</p>
+<p><strong> <em> domainMask</em> </strong> NSSearchPathDomainMask类型的enum值，指定搜索范围，这里的NSUserDomainMask表示搜索的范围限制于当前应用的沙盒目录。还可以写成NSLocalDomainMask（表示/Library）、NSNetworkDomainMask（表示/Network）等。</p>
+<p><strong> <em> expandTilde</em> </strong> BOOL值，表示是否展开波浪线。我们知道在iOS中的全写形式是/User/userName，该值为YES即表示写成全写形式，为NO就表示直接写成“~”。</p>
+<p>该值为NO:Caches目录路径~/Library/Caches<br>该值为YES:Caches目录路径<br>/var/mobile/Containers/Data/Application/E7B438D4-0AB3-49D0-9C2C-B84AF67C752B/Library/Caches</p>
+<h3 id="NSFileManager"><a href="#NSFileManager" class="headerlink" title="NSFileManager"></a>NSFileManager</h3><p>NSFileManager是一个文件管理类,单例<br>[[NSFileManager defaultManager]moveItemAtURL:location toURL:[NSURL fileURLWithPath:fullPath] error:nil]; //把loaction里面的东西move到后面的url里面</p>
+<h3 id="session下载文件BLock方式"><a href="#session下载文件BLock方式" class="headerlink" title="session下载文件BLock方式"></a>session下载文件BLock方式</h3><p>但是block方式下载有缺点.completionHandler后面的block代码会等到下载完毕才会走,如果文件过大,block中的代码就会很晚才走.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NSURLSessionDownloadTask * dataLoad = [session downloadTaskWithRequest:request completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) &#123;</span><br><span class="line"></span><br><span class="line">NSString * fullPath = [pathDocument stringByAppendingPathComponent:@&quot;2.mp4&quot;];</span><br><span class="line">[[NSFileManager defaultManager]moveItemAtURL:location toURL:[NSURL fileURLWithPath:fullPath] error:nil];</span><br><span class="line">NSLog(@&quot;%@&quot;,[NSThread currentThread]);</span><br><span class="line"></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<h4 id="下载进度问题-代理方法"><a href="#下载进度问题-代理方法" class="headerlink" title="下载进度问题  代理方法"></a>下载进度问题  代理方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite</span><br><span class="line">&#123;</span><br><span class="line">if (self.totalByte == nil || [self.totalByte.text doubleValue] != totalBytesExpectedToWrite) &#123;</span><br><span class="line">self.totalByte.text = [NSString stringWithFormat:@&quot;%lld&quot;,totalBytesExpectedToWrite];</span><br><span class="line">&#125;</span><br><span class="line">//bytesWritten 每秒下载的速度</span><br><span class="line">if (self.rainbowProgress) &#123;</span><br><span class="line">self.speedLabel.text = [NSString stringWithFormat:@&quot;%fkb/s&quot;,(double)bytesWritten/1024];</span><br><span class="line">self.rainbowProgress.progressValue = 1.0 *totalBytesWritten/totalBytesExpectedToWrite;</span><br><span class="line">NSLog(@&quot;%lld&quot;,totalBytesWritten/totalBytesExpectedToWrite);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>otalBytesWritten/totalBytesExpectedToWrite</strong>这两个除了要在前面加上 <code>1.0 *</code>要不是0</p>
+<h2 id="download的几个问题"><a href="#download的几个问题" class="headerlink" title="download的几个问题"></a>download的几个问题</h2><p>download下载的文件在tmp文件夹中,格式是tmp格式.<br>1.下载停了时间长了点再次开始失效了  失败原因有-1005,是因为网络连接断开失败.<br>2.在暂停后,记录tmp中下载的tmp文件,记录大小,然后再次点击开始,再次暂停,发现tmp文件大小没有变化,等待时间过长会改变到应该的大小.如果不等待,直接再次开始,直到结束,文件会正常显示,并没有如上次看到的tmp文件没有改变的状态.<br>3.网络下载过程中肯定会有一些什么样的状态文件一直在更新</p>
+<h4 id="download的缺点"><a href="#download的缺点" class="headerlink" title="download的缺点"></a>download的缺点</h4><p>1.文件下载位置在temp中,不及时处理会被系统删除.<br>2.同事下载多个文件会出现错乱,及时手动把下载好的文件从tmp移动到cache也会出现文件名重复等问题.</p>
+<h4 id="为了避免文件名称出现重复可以-为每一个task加一个唯一标示-用这个唯一标示来区分"><a href="#为了避免文件名称出现重复可以-为每一个task加一个唯一标示-用这个唯一标示来区分" class="headerlink" title="为了避免文件名称出现重复可以  为每一个task加一个唯一标示,用这个唯一标示来区分"></a>为了避免文件名称出现重复可以  为每一个task加一个唯一标示,用这个唯一标示来区分</h4>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -203,61 +248,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/05/14/沙盒下载/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/14/测试/" class="archive-article-date">
-  	<time datetime="2018-05-14T08:06:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-14</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/14/测试/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">测试</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/14/测试/">测试</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">测试1</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">测试2</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -280,8 +370,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
