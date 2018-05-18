@@ -152,6 +152,166 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2018-5-18" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/18/2018-5-18/">2018-5-18</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/18/2018-5-18/" class="archive-article-date">
+  	<time datetime="2018-05-18T03:26:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从nib文件中装载定制视图类的实例,在iPhone OS中,装载nib的代码并不通过initWithFrame:方法来实例化新的视图对象,而是通过NSCoding协议定义的initWithCoder:方法来进行.</p>
+<p>即使视图采纳了NSCoding协议,interface Builder也不知道它的定制属性,因此不知道如何将那些属性编码到nib文件中.所以,从nib文件装载定制视图时,initWithCoder:方法不具有进行正确初始化所需要的信息.为了解决这个问题,可以在自己的类中实现awakeFromNib方法,特别用于从nib文件装载的定制类.</p>
+<blockquote>
+<p>interface Builder跟nib文件什么关系?</p>
+</blockquote>
+<blockquote>
+<p>从nib文件中装载视图是怎么回事?<br>一般来说要尽量在initWithCoder中做初始化操作，毕竟这是最合理的地方，只要你的控件支持序列化，那么它就能在任何被反序列化的时候执行初始化操作，这里适合做全局数据、状态的初始化工作，也适合手动添加子视图。</p>
+</blockquote>
+<p>awakeFromNib相较于initWithCoder的优势是：当awakeFromNib执行的时候，各种IBOutlet也都连接好了；而initWithCoder调用的时候，虽然子视图已经被添加到视图层级中，但是还没有引用。如果你是基于xib或storyboard创建的控件，那么你可能需要对IBOutlet连接的子控件进行初始化工作，这种情况下，你只能在awakeFromNib里进行处理。同时xib或storyboard对灵活性是有打折的，因为它们创建的代码无法被继承，所以当你选择用xib或storyboard来实现一个控件的时候，你已经不需要对灵活性有很高的要求了，唯一要做的是要保证用户一定是通过xib创建的此控件，否则可能是一个空的视图，可以在initWithFrame里放置一个断言或者异常来通知控件的用户。</p>
+<p>最后还要注意视图层级的问题，比如你要给View放置一个背景，你可能会在initWithCoder或awakeFromNib中这样写：</p>
+<p>1 [self addSubview:self.backgroundView];//通过懒加载一个背景View，然后添加到视图层级上</p>
+<p>你的本意是在控件的最下面放置一个背景，却有可能将这个背景覆盖到控件的最上方，原因是用户可能会在xib里写入这个控件，然后往它上面添加一些子视图，这样一来，用户添加的这些子视图会在你添加背景之前先进入视图层级，你的背景被添加后就挡住了用户的子视图。如果你想支持用户的这种操作，可以把addSubview替换成insertSubview:atIndex:.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">自定义view</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/18/2018-5-18/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2018-5-17" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/17/2018-5-17/">2018-5-17</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/17/2018-5-17/" class="archive-article-date">
+  	<time datetime="2018-05-17T03:03:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>看高德地图SDK过程中,‘@protocol MAAnnotation <nsobject>‘<br>协议里面添加了属性  之前没有这么用过. 怎么可以加属性,为甚要加属性,有什么好处?</nsobject></p>
+<p>做自定义标注的时候,mapView的代理如果放到了定义MAPointAnnotation后面,然而不知道为什么.!!!!!!!!!</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/17/2018-5-17/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-沙盒下载" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -773,162 +933,6 @@
 
 
   
-    <article id="post-MVC和MVVM框架" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/02/MVC和MVVM框架/">MVC和MVVM框架</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/02/MVC和MVVM框架/" class="archive-article-date">
-  	<time datetime="2018-01-02T05:46:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>自定义了一个完整的日历才发现原来MVC框架并不应该只是在tableView里面用,MVC框架应该是写代码的规范.遵循MVC会让自己的代码和逻辑更加的清晰和规范.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MVC框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/02/MVC和MVVM框架/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/02/语法/">语法</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/02/语法/" class="archive-article-date">
-  	<time datetime="2018-01-02T03:39:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这个写的格式Markdowm,链接<a href="https://guides.github.com/features/mastering-markdown/" target="_blank" rel="noopener">就是这个</a>,<a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/" target="_blank" rel="noopener">还有这个</a></p>
-<h2 id="创建标题"><a href="#创建标题" class="headerlink" title="创建标题"></a>创建标题</h2><p>在文字前面添加 # 号符号,# 越多,字体越小,越细</p>
-<h2 id="造型文字"><a href="#造型文字" class="headerlink" title="造型文字"></a>造型文字</h2><p><strong>两个*号之间的是粗体</strong> <strong>两个_之间的也是粗体</strong> ,想要打出特殊字符,可以再特殊字符前面添加\ 快捷键是:<br>
-        
-          <a class="article-more-a" href="/2018/01/02/语法/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编写语法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/02/语法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1026,31 +1030,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">测试1</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">测试2</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">沙盒</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">下载</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">NSURLSessionDownloadTask</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">cocoapods</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">自定义view</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1070,6 +1058,30 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">沙盒</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">下载</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">NSURLSessionDownloadTask</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">测试1</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">测试2</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">CSR文件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Category</a>
               </li>
              
@@ -1079,10 +1091,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">编写语法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">CSR文件</a>
               </li>
             
             <div class="clearfix"></div>

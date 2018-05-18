@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 编写语法 | Hexo</title>
+  <title>2018-5-18 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/编写语法/index.html">
+  <meta name="description" content="从nib文件中装载定制视图类的实例,在iPhone OS中,装载nib的代码并不通过initWithFrame:方法来实例化新的视图对象,而是通过NSCoding协议定义的initWithCoder:方法来进行. 即使视图采纳了NSCoding协议,interface Builder也不知道它的定制属性,因此不知道如何将那些属性编码到nib文件中.所以,从nib文件装载定制视图时,initWith">
+<meta name="keywords" content="自定义view">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-5-18">
+<meta property="og:url" content="http://yoursite.com/2018/05/18/2018-5-18/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="从nib文件中装载定制视图类的实例,在iPhone OS中,装载nib的代码并不通过initWithFrame:方法来实例化新的视图对象,而是通过NSCoding协议定义的initWithCoder:方法来进行. 即使视图采纳了NSCoding协议,interface Builder也不知道它的定制属性,因此不知道如何将那些属性编码到nib文件中.所以,从nib文件装载定制视图时,initWith">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-18T05:20:52.600Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="2018-5-18">
+<meta name="twitter:description" content="从nib文件中装载定制视图类的实例,在iPhone OS中,装载nib的代码并不通过initWithFrame:方法来实例化新的视图对象,而是通过NSCoding协议定义的initWithCoder:方法来进行. 即使视图采纳了NSCoding协议,interface Builder也不知道它的定制属性,因此不知道如何将那些属性编码到nib文件中.所以,从nib文件装载定制视图时,initWith">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,60 +155,178 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-2018-5-18" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/02/语法/" class="archive-article-date">
-  	<time datetime="2018-01-02T03:39:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-02</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/02/语法/">语法</a>
+    <h1 class="article-title" itemprop="name">
+      2018-5-18
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/05/18/2018-5-18/" class="archive-article-date">
+  	<time datetime="2018-05-18T03:26:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从nib文件中装载定制视图类的实例,在iPhone OS中,装载nib的代码并不通过initWithFrame:方法来实例化新的视图对象,而是通过NSCoding协议定义的initWithCoder:方法来进行.</p>
+<p>即使视图采纳了NSCoding协议,interface Builder也不知道它的定制属性,因此不知道如何将那些属性编码到nib文件中.所以,从nib文件装载定制视图时,initWithCoder:方法不具有进行正确初始化所需要的信息.为了解决这个问题,可以在自己的类中实现awakeFromNib方法,特别用于从nib文件装载的定制类.</p>
+<blockquote>
+<p>interface Builder跟nib文件什么关系?</p>
+</blockquote>
+<blockquote>
+<p>从nib文件中装载视图是怎么回事?<br>一般来说要尽量在initWithCoder中做初始化操作，毕竟这是最合理的地方，只要你的控件支持序列化，那么它就能在任何被反序列化的时候执行初始化操作，这里适合做全局数据、状态的初始化工作，也适合手动添加子视图。</p>
+</blockquote>
+<p>awakeFromNib相较于initWithCoder的优势是：当awakeFromNib执行的时候，各种IBOutlet也都连接好了；而initWithCoder调用的时候，虽然子视图已经被添加到视图层级中，但是还没有引用。如果你是基于xib或storyboard创建的控件，那么你可能需要对IBOutlet连接的子控件进行初始化工作，这种情况下，你只能在awakeFromNib里进行处理。同时xib或storyboard对灵活性是有打折的，因为它们创建的代码无法被继承，所以当你选择用xib或storyboard来实现一个控件的时候，你已经不需要对灵活性有很高的要求了，唯一要做的是要保证用户一定是通过xib创建的此控件，否则可能是一个空的视图，可以在initWithFrame里放置一个断言或者异常来通知控件的用户。</p>
+<p>最后还要注意视图层级的问题，比如你要给View放置一个背景，你可能会在initWithCoder或awakeFromNib中这样写：</p>
+<p>1 [self addSubview:self.backgroundView];//通过懒加载一个背景View，然后添加到视图层级上</p>
+<p>你的本意是在控件的最下面放置一个背景，却有可能将这个背景覆盖到控件的最上方，原因是用户可能会在xib里写入这个控件，然后往它上面添加一些子视图，这样一来，用户添加的这些子视图会在你添加背景之前先进入视图层级，你的背景被添加后就挡住了用户的子视图。如果你想支持用户的这种操作，可以把addSubview替换成insertSubview:atIndex:.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编写语法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">自定义view</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/05/18/2018-5-18/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/05/17/2018-5-17/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2018-5-17</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -226,9 +349,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
