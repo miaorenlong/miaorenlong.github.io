@@ -152,6 +152,362 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-python-md" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/13/python-md/">python.md</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/13/python-md/" class="archive-article-date">
+  	<time datetime="2018-08-13T03:21:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/13/python-md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-block" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/27/block/">block</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/27/block/" class="archive-article-date">
+  	<time datetime="2018-07-27T03:37:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>iOS代码块 Block </p>
+<p>block是一种特殊的数据类型,数据类型,非特殊的数据类型有:基本数据类型 对象数据类型和ID类型</p>
+<ol>
+<li>基本数据类型是:int float double和char 类型</li>
+<li>对象类型就是类或者协议所声明的指针类型</li>
+<li>ID类型可以表示任何类型</li>
+</ol>
+<p>Block因为还是数据类型,所以可以作为参数 作为返回值,特殊地还可以保存一段代码.</p>
+<p>Block变量就像int变量一样,可以声明和赋值. 同时保存了一段代码,可以调用执行保存的代码.</p>
+<p>声明一个无返回值,参数为两个字符串对象,叫做myBlock的Block<br>void(^myBlock)(NSString <em> , NSString </em>);<br>对myBlock进行赋值<br>myBlock = ^(NSString <em>x, NSString </em>y){<br>        NSLog(就这么任性,就是不用这两个参数);<br>};</p>
+<p>测试第一种情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    void(^myBlock)(NSString *,NSString *) = ^(NSString * str1,NSString * str2)&#123;</span><br><span class="line">        NSLog(@&quot;我是谁我在那%@&quot;,[NSString stringWithFormat:@&quot;%@%@&quot;,str1,str2]);</span><br><span class="line">    &#125;;</span><br><span class="line">    myBlock(@&quot;1+1+&quot;,@&quot;2&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输出结果是：</span><br><span class="line">2018-07-27 16:16:08.132386+0800 Block[54636:7943494] 我是谁我在那1+1+2</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这个是简单的block的定义和调用</p>
+</blockquote>
+<p>测试第二种情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    void(^myBlock)(NSString *,NSString *) = ^(NSString * str1,NSString * str2)&#123;</span><br><span class="line">        NSLog(@&quot;我是谁我在那%@&quot;,[NSString stringWithFormat:@&quot;%@%@&quot;,str1,str2]);</span><br><span class="line">    &#125;;</span><br><span class="line">    myBlock(@&quot;1+1+&quot;,@&quot;2&quot;);</span><br><span class="line">    [self changeBlock:myBlock];</span><br><span class="line">&#125;</span><br><span class="line">-(void)changeBlock:(void(^)(NSString *,NSString *))block</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@&quot;what&apos;s fuck&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2018-07-27 16:30:36.010792+0800 Block[54766:7958952] 我是谁我在那1+1+2</span><br><span class="line">2018-07-27 16:30:36.010938+0800 Block[54766:7958952] what&apos;s fuck</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>定义了一个带有block类型参数的函数，带有的block是无返回值，带有两个字符串参数的block，跟上面定义的一样，但是在调用的时候，把上面定义的那个myBlock作为参数传入函数，发现并没有走myBlock。</p>
+</blockquote>
+<p>第三种情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    void(^myBlock)(NSString *,NSString *) = ^(NSString * str1,NSString * str2)&#123;</span><br><span class="line">        NSLog(@&quot;我是谁我在那%@&quot;,[NSString stringWithFormat:@&quot;%@%@&quot;,str1,str2]);</span><br><span class="line">    &#125;;</span><br><span class="line">    myBlock(@&quot;1+1+&quot;,@&quot;2&quot;);</span><br><span class="line">    [self changeBlock:^(NSString * str1, NSString * str2) &#123;</span><br><span class="line">        NSLog(@&quot;调用方法,走block吗&quot;);</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br><span class="line">-(void)changeBlock:(void(^)(NSString *,NSString *))block</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@&quot;what&apos;s fuck&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>定义了带有block类型参数的函数，在调用函数的时候实现了参数block的实现，然而没有卵用</p>
+</blockquote>
+<p>以前看过很多的栈堆的描述,但这次好像可以永远记住.放在栈中的数据是局部的变量,存放函数的参数值,在执行后就释放. 对于堆是 通过new malloc realloc分配的内存块,释放需要程序来释放.</p>
+<blockquote>
+<p>写了一个最简单的demo:</p>
+</blockquote>
+<p>两个控制器,两个UITextField,点击PUSH 点击POP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-(void)pushToSender:(UIButton *)btn</span><br><span class="line">&#123;</span><br><span class="line">    UIStoryboard * getSendSB = [UIStoryboard storyboardWithName:@&quot;GetSend&quot; bundle:[NSBundle mainBundle]];</span><br><span class="line">    SendViewController * sendVC = [getSendSB instantiateViewControllerWithIdentifier:@&quot;Send&quot;];</span><br><span class="line">    sendVC.myBlock = ^(NSString * str) &#123;</span><br><span class="line">        self.FirstTf.text = str;</span><br><span class="line">    &#125;;</span><br><span class="line">    [sendVC testSend];</span><br><span class="line">    [self.navigationController pushViewController:sendVC animated:YES];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>两个控制器通过storyboard创建,WithIdentifier:@”Send” 是控制器的identity ID</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-(void)dismissVC</span><br><span class="line">&#123;</span><br><span class="line">    self.myBlock(self.firstTf.text);</span><br><span class="line">    [self.navigationController popViewControllerAnimated:YES];</span><br><span class="line">&#125;</span><br><span class="line">-(void)testSend</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@&quot;当方法被调用,会执行这个方法的实现,在%@控制器中运行&quot;,self);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>整个的运行顺序是:创建SendVC,myBlock的声明在.h文件文件,实现在当前控制器中,block保留了这个实现代码段. 在sendVC调用TestSend方法的时候,进入sendVC中,运行了这个方法的实现代码. 在sendVC调用dismissVC方法的时候,调用了myBlock,运行了该block的实现方法.  block内部代码段的处理有必要多了解.  </p>
+</blockquote>
+<p>###block作为参数使用,在各框架中常被使用,比如封装一个类,这个类要做什么事情由外界决定,什么时候调用,这个类自己决定.</p>
+<blockquote>
+<p>问题是,为什么block可以实现这样的功能,怎么做到的.他跟平常见的函数怎么这么大的区别. 有说法是:block会保留代码段,这样的说法是否成立</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/27/block/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-crash" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/18/crash/">crash</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/18/crash/" class="archive-article-date">
+  	<time datetime="2018-07-18T08:29:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/18/crash/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-高德的坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/11/高德的坑/">高德的坑</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/11/高德的坑/" class="archive-article-date">
+  	<time datetime="2018-06-11T07:58:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>setZoomLevel<br>这个方法改变缩放比例的  需要放到viewDidAppear 方法中<br>放到其他方法中不知道为什么不会实现</p>
+<p>高德的定位点是有几种定位方式,精度会有区别.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/11/高德的坑/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-自定义视图" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/11/自定义视图/">自定义视图</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/11/自定义视图/" class="archive-article-date">
+  	<time datetime="2018-06-11T02:19:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/11/自定义视图/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2018-5-18" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -557,385 +913,9 @@
 
 
   
-    <article id="post-数组字典字符串互转data" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/05/数组字典字符串互转data/">数组字典字符串互转data</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/05/数组字典字符串互转data/" class="archive-article-date">
-  	<time datetime="2018-01-05T06:12:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="NSData转换为NSString、NSDictionary和NSArray"><a href="#NSData转换为NSString、NSDictionary和NSArray" class="headerlink" title="NSData转换为NSString、NSDictionary和NSArray"></a>NSData转换为NSString、NSDictionary和NSArray</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&amp;response error:&amp;error];  </span><br><span class="line">NSString *result = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&amp;response error:&amp;error];  </span><br><span class="line">NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&amp;error];</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSData *data = [NSKeyedArchiver archivedDataWithRootObject:array];  </span><br><span class="line">NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:data];</span><br></pre></td></tr></table></figure>
-<h4 id="NSString、NSDictionary和NSArray转换为NSData"><a href="#NSString、NSDictionary和NSArray转换为NSData" class="headerlink" title="NSString、NSDictionary和NSArray转换为NSData"></a>NSString、NSDictionary和NSArray转换为NSData</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSString *string = @&quot;I am a String&quot;;    </span><br><span class="line">NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSDictionary *dic = @&#123;@&quot;name&quot;: @&quot;Jerry&quot;, @&quot;age&quot;: @&quot;24&quot;&#125;;  </span><br><span class="line">NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = [[NSArray alloc]initWithObjects:@&quot;0&quot;,@&quot;1&quot;,nil];  </span><br><span class="line">NSData *data = [NSKeyedArchiver archivedDataWithRootObject:array];</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/05/数组字典字符串互转data/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2018-1-5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/05/2018-1-5/">下载方面</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/05/2018-1-5/" class="archive-article-date">
-  	<time datetime="2018-01-05T01:59:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在使用NSURLSessionDownloadTask的取消操作的时候,使用<code>- (void)cancelByProducingResumeData:(void (^)(NSData * _Nullable resumeData))completionHandler;</code> 在这个函数中 好像不能直接创建新的DownloadTask</p>
-<h4 id="在下载"><a href="#在下载" class="headerlink" title="在下载"></a>在下载</h4><p>在下载过程中,初始化NSURLSession,<code>NSURLSessionConfiguration</code> 配置是关键</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NSURLSessionConfiguration * config = [NSURLSessionConfiguration defaultSessionConfiguration];</span><br><span class="line">NSURLSession * session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];</span><br><span class="line"></span><br><span class="line">NSURLSession * session1 = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];</span><br><span class="line">两个Session是不一样的地址,也就是说两个Session是不同的</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2018/01/05/2018-1-5/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/05/2018-1-5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-downloadTask" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/04/downloadTask/">downloadTask</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/04/downloadTask/" class="archive-article-date">
-  	<time datetime="2018-01-04T02:49:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="downloadTask-问题"><a href="#downloadTask-问题" class="headerlink" title="downloadTask 问题"></a>downloadTask 问题</h3><p>1.代理方法<code>-(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location</code> ,这个方法是在下载完成后才会触发运行,但是系统内部怎么确定他已经加载完成了???<br>
-        
-          <a class="article-more-a" href="/2018/01/04/downloadTask/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/04/downloadTask/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Cocoapods" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/03/Cocoapods/">Cocoapods</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/03/Cocoapods/" class="archive-article-date">
-  	<time datetime="2018-01-03T01:05:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>platform :ios, ‘8.0’</p>
-<p>target “targetName” do</p>
-<p>pod ‘AFNetworking’</p>
-<p>end</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">cocoapods</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/03/Cocoapods/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-tableView键盘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/02/tableView键盘/">tableView键盘</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/02/tableView键盘/" class="archive-article-date">
-  	<time datetime="2018-01-02T06:20:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="tableView收回键盘及思路扩展"><a href="#tableView收回键盘及思路扩展" class="headerlink" title="tableView收回键盘及思路扩展"></a>tableView收回键盘及思路扩展</h2><p>第一种方法:</p>
-<p><code>-(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event</code></p>
-<p>有点击事件发生在当前view上面或者父view,自view,都会走这个方法(后期继续测试下这个方法具体全面的作用),这个方法会在当前view上面找到并输出最合适的view来响应这个点击.</p>
-        
-          <a class="article-more-a" href="/2018/01/02/tableView键盘/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tableView</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/02/tableView键盘/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1034,15 +1014,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cocoapods</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">自定义view</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MVC框架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cocoapods</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1058,18 +1034,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">沙盒</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">下载</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">NSURLSessionDownloadTask</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">测试1</a>
               </li>
              
@@ -1082,6 +1046,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">沙盒</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">下载</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">NSURLSessionDownloadTask</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Category</a>
               </li>
              
@@ -1091,6 +1067,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">编写语法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">自定义view</a>
               </li>
             
             <div class="clearfix"></div>
